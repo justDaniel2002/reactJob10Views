@@ -1,6 +1,8 @@
 import React from "react";
 
-const Header = () => {
+const pages = ["Home", "Intership", "Courses"];
+
+const Navbar = () => {
   return (
     <>
       <header className="bg-white">
@@ -37,25 +39,17 @@ const Header = () => {
             </button>
           </div>
           <div className="hidden lg:flex lg:gap-x-20">
-            <a
-              href="#"
-              className="text-sm font-semibold leading-6 text-gray-900"
-            >
-              Home
-            </a>
-            <a
-              href="#"
-              className="text-sm font-semibold leading-6 text-gray-900"
-            >
-              Intership
-            </a>
-            <a
-              href="#"
-              className="text-sm font-semibold leading-6 text-gray-900"
-            >
-              Courses
-            </a>
+
+            {pages.map(page => {
+                return (
+                    <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+                        {page}
+                    </a>
+                )
+            })}
+            
           </div>
+          
           <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-3">
             <a href="#" className="text-sm font-semibold leading-6">
               <button className="bg-transparent hover:bg-blue-900 text-blue-900 font-semibold hover:text-white py-1 px-4 border border-blue-900 hover:border-transparent rounded">
@@ -213,4 +207,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Navbar;
