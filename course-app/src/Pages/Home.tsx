@@ -11,7 +11,6 @@ import BamBooLogo from "../Images/BamBooLogo.png"
 import TurnedInNotOutlinedIcon from "@mui/icons-material/TurnedInNotOutlined";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
-
 const Cards = [
   {
     label: "Wordpress Development",
@@ -38,10 +37,11 @@ const Cards = [
 const LOGOS = [VINFAST, FPT, BamBooLogo, Chorme, CarLOGO]
 
 const Home = () => {
+
   return (
     <>
       <Navbar />
-
+      
       <div>
         <img
           src={WelcomeImage}
@@ -112,7 +112,7 @@ const Home = () => {
                 </div>
                 <hr />
                 <div className="p-4 flex justify-end text-blue-800">
-                  <a className="">
+                  <a>
                     View Details <KeyboardArrowRightIcon />
                   </a>
                 </div>

@@ -1,10 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
+import ShowModal from "./Modals";
+
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+
+const style = {
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 600,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 const pages = ["Home", "Intership", "Courses"];
 
 const Navbar = () => {
+  const [currentPage, setCurrentPage] = useState(pages[0]);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <>
+      <div>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <ShowModal handleClose={handleClose}/>
+          </Box>
+        </Modal>
+      </div>
       <header className="bg-white">
         <nav
           className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
@@ -39,169 +74,50 @@ const Navbar = () => {
             </button>
           </div>
           <div className="hidden lg:flex lg:gap-x-20">
-
-            {pages.map(page => {
-                return (
-                    <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-                        {page}
-                    </a>
-                )
+            {pages.map((page) => {
+              return currentPage === page ? (
+                <a
+                  href="#"
+                  className=" text-sm font-semibold leading-6 text-blue-500 underline decoration-blue-500"
+                >
+                  {page}
+                </a>
+              ) : (
+                <a
+                  onClick={() => setCurrentPage(page)}
+                  href="#"
+                  className=" text-sm font-semibold leading-6 text-gray-900"
+                >
+                  {page}
+                </a>
+              );
             })}
-            
           </div>
-          
+
           <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-3">
-            <a href="#" className="text-sm font-semibold leading-6">
-              <button className="bg-transparent hover:bg-blue-900 text-blue-900 font-semibold hover:text-white py-1 px-4 border border-blue-900 hover:border-transparent rounded">
+            <a onClick={handleOpen}
+              className="text-sm font-semibold leading-6"
+            >
+              <button
+                className="bg-transparent hover:bg-blue-900 text-blue-900 font-semibold hover:text-white py-1 px-4 border border-blue-900 hover:border-transparent rounded"
+              >
                 Log In
               </button>
             </a>
             <a href="#" className="text-sm font-semibold leading-6">
-              <button className="bg-blue-900 hover:bg-white text-white font-semibold hover:text-white py-1 px-4 border border-blue-900 hover:border-transparent rounded">
+              <button className="bg-blue-900 hover:bg-white text-white font-semibold hover:text-blue-900 py-1 px-4 border border-blue-900 rounded">
                 Register
               </button>
             </a>
             <a href="#" className="text-sm font-semibold leading-6">
-              <button className="opacity-50 cursor-not-allowed bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded shadow">
+              <button className="opacity-50 cursor-not-allowed bg-white hover:bg-gray-10 text-gray-800 font-semibold py-1 px-4 border border-gray-400  rounded shadow">
                 Admin
               </button>
             </a>
           </div>
         </nav>
 
-        <div className="lg:hidden" role="dialog" aria-modal="true">
-          <div className="fixed inset-0 z-10"></div>
-          <div className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-            <div className="flex items-center justify-between">
-              <a href="#" className="-m-1.5 p-1.5">
-                <span className="sr-only">Your Company</span>
-                <img
-                  className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                  alt=""
-                />
-              </a>
-              <button
-                type="button"
-                className="-m-2.5 rounded-md p-2.5 text-gray-700"
-              >
-                <span className="sr-only">Close menu</span>
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            </div>
-            <div className="mt-6 flow-root">
-              <div className="-my-6 divide-y divide-gray-500/10">
-                <div className="space-y-2 py-6">
-                  <div className="-mx-3">
-                    <button
-                      type="button"
-                      className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                      aria-controls="disclosure-1"
-                      aria-expanded="false"
-                    >
-                      <svg
-                        className="h-5 w-5 flex-none"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                          clip-rule="evenodd"
-                        />
-                      </svg>
-                    </button>
-
-                    <div className="mt-2 space-y-2" id="disclosure-1">
-                      <a
-                        href="#"
-                        className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                      >
-                        Analytics
-                      </a>
-                      <a
-                        href="#"
-                        className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                      >
-                        Engagement
-                      </a>
-                      <a
-                        href="#"
-                        className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                      >
-                        Security
-                      </a>
-                      <a
-                        href="#"
-                        className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                      >
-                        Integrations
-                      </a>
-                      <a
-                        href="#"
-                        className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                      >
-                        Automations
-                      </a>
-                      <a
-                        href="#"
-                        className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                      >
-                        Watch demo
-                      </a>
-                      <a
-                        href="#"
-                        className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                      >
-                        Contact sales
-                      </a>
-                    </div>
-                  </div>
-                  <a
-                    href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  >
-                    Features
-                  </a>
-                  <a
-                    href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  >
-                    Marketplace
-                  </a>
-                  <a
-                    href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  >
-                    Company
-                  </a>
-                </div>
-                <div className="py-6">
-                  <a
-                    href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  >
-                    Log in
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        
       </header>
     </>
   );
