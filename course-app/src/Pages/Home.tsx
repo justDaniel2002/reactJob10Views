@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../Components/Navbar";
+import {Navbar } from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import WelcomeImage from "../Images/Welcome.png";
 import Chorme from "../Images/CHORME_LOGO.png";

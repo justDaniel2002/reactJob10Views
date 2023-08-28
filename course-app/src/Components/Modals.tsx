@@ -1,5 +1,126 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
+const SignUpModal = () => {
+  return (
+    <>
+      <h3 className="mb-4 text-xl font-medium text-center items-center text-gray-900 dark:text-white">
+        <button
+          className="px-4 py-2 border justify-center items-center flex gap-2 border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150 m-auto"
+          style={{ width: "100%" }}
+        >
+          <img
+            className="w-5 h-5"
+            src="https://www.svgrepo.com/show/475656/google-color.svg"
+            loading="lazy"
+            alt="google logo"
+          />
+          <span>Login with Google</span>
+        </button>
+      </h3>
+      <form className="space-y-6" action="#">
+        <div>
+          <label
+            htmlFor="email"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Email
+          </label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+            placeholder="name@company.com"
+            required
+          />
+        </div>
+        <div>
+          <label
+            htmlFor="password"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Password
+          </label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="••••••••"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+            required
+          />
+        </div>
+        <div className="flex justify-between">
+          <div className="w-full pr-1">
+            <label
+              htmlFor="firstName"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              First Name
+            </label>
+            <input
+              type="text"
+              name="firstName"
+              id="firstName"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+              placeholder="First Name"
+              required
+            />
+          </div>
+          <div className="w-full pl-1">
+            <label
+              htmlFor="lastName"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Last Name
+            </label>
+            <input
+              type="text"
+              name="lastName"
+              id="lastName"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+              placeholder="Last Name"
+              required
+            />
+          </div>
+        </div>
+        <div className="flex justify-between">
+          <div className="flex items-start">
+            <label
+              htmlFor="remember"
+              className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >
+              By Signing up, you agree to our <a className="text-blue-800">Terms and Conditions</a>
+            </label>
+          </div>
+          
+        </div>
+        <button
+          type="submit"
+          className="w-full text-white bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          Sign Up
+        </button>
+        <div className="text-sm text-center font-medium text-gray-500 dark:text-gray-300">
+          Already Register?
+          <Link to="/"
+            className="text-blue-700 hover:underline dark:text-blue-500"
+          >
+            Login
+          </Link>
+          /
+          <a
+            href="#"
+            className="text-blue-700 hover:underline dark:text-blue-500"
+          >
+            Company{")"}
+          </a>
+        </div>
+      </form>
+    </>
+  );
+};
 const StudentLoginModal = () => {
   return (
     <>
@@ -83,19 +204,19 @@ const StudentLoginModal = () => {
         </button>
         <div className="text-sm text-center font-medium text-gray-500 dark:text-gray-300">
           New To IT LAND? Register {"("}
-          <a
-            href="#"
+          <Link
+            to="/SignUp"
             className="text-blue-700 hover:underline dark:text-blue-500"
           >
             Student
-          </a>
+          </Link>
           /
-          <a
-            href="#"
+          <Link
+            to="/SignUp"
             className="text-blue-700 hover:underline dark:text-blue-500"
           >
             Company{")"}
-          </a>
+          </Link>
         </div>
       </form>
     </>
@@ -171,19 +292,19 @@ const AdminLoginModal = () => {
         </button>
         <div className="text-sm text-center font-medium text-gray-500 dark:text-gray-300">
           New To IT LAND? Register {"("}
-          <a
-            href="#"
+          <Link
+            to="/SignUp"
             className="text-blue-700 hover:underline dark:text-blue-500"
           >
             Student
-          </a>
+          </Link>
           /
-          <a
-            href="#"
+          <Link
+            to="/SignUp"
             className="text-blue-700 hover:underline dark:text-blue-500"
           >
             Company{")"}
-          </a>
+          </Link>
         </div>
       </form>
     </>
@@ -194,15 +315,15 @@ const ShowModal = ({ handleClose }: any) => {
   const [showing, setShowing] = useState(StudentLoginModal());
   const [selectedModal, setSelected] = useState("Student");
 
-  const Selected = (str:string) => {
-    if(str=="Student"){
-        setShowing(StudentLoginModal())
-        setSelected("Student")
-    }else{
-        setShowing(AdminLoginModal())
-        setSelected("Admin")
+  const Selected = (str: string) => {
+    if (str == "Student") {
+      setShowing(StudentLoginModal());
+      setSelected("Student");
+    } else {
+      setShowing(AdminLoginModal());
+      setSelected("Admin");
     }
-  }
+  };
 
   return (
     <>
@@ -292,3 +413,4 @@ const ShowModal = ({ handleClose }: any) => {
 };
 
 export default ShowModal;
+export {SignUpModal}

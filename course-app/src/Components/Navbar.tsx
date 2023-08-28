@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import ShowModal from "./Modals";
 
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import { Link } from "react-router-dom";
 import Modal from "@mui/material/Modal";
 
 const style = {
@@ -104,11 +103,11 @@ const Navbar = () => {
                 Log In
               </button>
             </a>
-            <a href="#" className="text-sm font-semibold leading-6">
+            <Link to="/SignUp" className="text-sm font-semibold leading-6">
               <button className="bg-blue-900 hover:bg-white text-white font-semibold hover:text-blue-900 py-1 px-4 border border-blue-900 rounded">
                 Register
               </button>
-            </a>
+            </Link>
             <a href="#" className="text-sm font-semibold leading-6">
               <button className="opacity-50 cursor-not-allowed bg-white hover:bg-gray-10 text-gray-800 font-semibold py-1 px-4 border border-gray-400  rounded shadow">
                 Admin
@@ -123,4 +122,47 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+const Navbar2 = () => {
+
+  return (
+    <>
+      <header className="bg-white">
+        <nav
+          className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+          aria-label="Global"
+        >
+          <div className="flex lg:flex-1">
+            <a href="#" className="-m-1.5 p-1.5">
+              <span className="sr-only">Your Company</span>
+              <h1 className="font-black text-2xl text-blue-900">IT LAND</h1>
+            </a>
+          </div>
+          <div className="flex lg:hidden">
+            <button
+              type="button"
+              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+            >
+              <span className="sr-only">Open main menu</span>
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                />
+              </svg>
+            </button>
+          </div>
+        </nav>
+      </header>
+    </>
+  );
+};
+
+export {Navbar, Navbar2};
