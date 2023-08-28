@@ -35,7 +35,7 @@ const Navbar = () => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <ShowModal handleClose={handleClose}/>
+            <ShowModal handleClose={handleClose} />
           </Box>
         </Modal>
       </div>
@@ -75,31 +75,27 @@ const Navbar = () => {
           <div className="hidden lg:flex lg:gap-x-20">
             {pages.map((page) => {
               return currentPage === page ? (
-                <a
-                  href="#"
+                <Link
+                  to={"/"+page}
                   className=" text-sm font-semibold leading-6 text-blue-500 underline decoration-blue-500"
                 >
                   {page}
-                </a>
+                </Link>
               ) : (
-                <a
+                <Link
+                  to={"/"+page}
                   onClick={() => setCurrentPage(page)}
-                  href="#"
                   className=" text-sm font-semibold leading-6 text-gray-900"
                 >
                   {page}
-                </a>
+                </Link>
               );
             })}
           </div>
 
           <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-3">
-            <a onClick={handleOpen}
-              className="text-sm font-semibold leading-6"
-            >
-              <button
-                className="bg-transparent hover:bg-blue-900 text-blue-900 font-semibold hover:text-white py-1 px-4 border border-blue-900 hover:border-transparent rounded"
-              >
+            <a onClick={handleOpen} className="text-sm font-semibold leading-6">
+              <button className="bg-transparent hover:bg-blue-900 text-blue-900 font-semibold hover:text-white py-1 px-4 border border-blue-900 hover:border-transparent rounded">
                 Log In
               </button>
             </a>
@@ -115,15 +111,12 @@ const Navbar = () => {
             </a>
           </div>
         </nav>
-
-        
       </header>
     </>
   );
 };
 
 const Navbar2 = () => {
-
   return (
     <>
       <header className="bg-white">
@@ -165,4 +158,4 @@ const Navbar2 = () => {
   );
 };
 
-export {Navbar, Navbar2};
+export { Navbar, Navbar2 };
