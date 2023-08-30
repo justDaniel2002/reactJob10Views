@@ -15,35 +15,36 @@ import FPT from "../Images/FPT_LOGO.png";
 import VINFAST from "../Images/VINFAST_LOGO.png";
 import CarLOGO from "../Images/Logo-Zalo-Arc 9.png";
 import BamBooLogo from "../Images/BamBooLogo.png";
-import TMA from "../Images/TMA_LOGO.png";
-import GLASS from "../Images/GLASS_LOGO.png";
-import GLOBALCYBER from "../Images/GLOBALCYBER.png"
+import { Cards } from "../Data/Data";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
+import { Link } from "react-router-dom";
 
+const Categories = [
+  "Computer Science",
+  "Blockchain Development",
+  "Full Stack Development",
+  "Network Engineering",
+  "Python Development",
+  "Website Design",
+  "WordPress Development",
+  "Unity Game Development",
+  "Mobile App Development"
+]
 
-const Cards = [
-  {
-    label: "C# .NET Development",
-    title: "Fpt software",
-    logo: FPT,
-  },
-  {
-    label: "Wordpress Development",
-    title: "TMA SolutionsSolutions",
-    logo: TMA,
-  },
-  {
-    label: "Unity Game Development",
-    title: "Glass Digital Media",
-    logo: GLASS,
-  },
-  {
-    label: "3D Design",
-    title: "Global CyberSoft",
-    logo: GLOBALCYBER,
-  },
-];
+const Locations = [
+  "Work from home",
+  "Ha Noi",
+  "Ho Chi Minh",
+  "Da Nang",
+  "An Giang",
+  "Ba Ria - Vung Tau",
+  "Bac Giang",
+  "Bac Kan",
+  "Bac Lieu",
+  "Bac Ninh"
+]
+
 
 const LOGOS = [VINFAST, FPT, BamBooLogo, Chorme, CarLOGO];
 
@@ -138,11 +139,13 @@ const Interships = () => {
     {
       title: "Category",
       value: category,
+      parts: Categories,
       isSelect: true,
     },
     {
       title: "Location",
       value: location,
+      parts: Locations,
       isSelect: true,
     },
     {
@@ -186,9 +189,9 @@ const Interships = () => {
                         label={section.title}
                         onChange={(event) => handleChange(event, section.title)}
                       >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
+                        {section.parts?.map((part) =><>
+                          <MenuItem value={part}>{part}</MenuItem>
+                        </>)}
                       </Select>
                     </>
                   ) : (
@@ -311,10 +314,10 @@ const Interships = () => {
                             Actively Hiring
                           </div>
                           <div className="text-gray-900 font-semibold text-4xl mb-1">
-                            {card.title}
+                            {card.label}
                           </div>
                           <p className="text-gray-400 text-xl text-thin">
-                            {card.label}
+                            {card.title}
                           </p>
                           <hr className="mb-5" />
 
@@ -364,9 +367,9 @@ const Interships = () => {
                   <hr />
                   <div className="p-4 flex justify-end text-blue-800">
                     <TurnedInNotOutlinedIcon className="text-gray-400" />
-                    <a>
+                    <Link to={"Details/"+card.id}>
                       View Details <KeyboardArrowRightIcon />
-                    </a>
+                    </Link>
                   </div>
                 </div>
               );
