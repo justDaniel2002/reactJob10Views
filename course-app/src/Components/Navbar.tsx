@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import ShowModal from "./Modals";
-
 import Box from "@mui/material/Box";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Modal from "@mui/material/Modal";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import ForumIcon from "@mui/icons-material/Forum";
+import AdminImg from "../Images/admin.jpg";
+import Context from "../Context/Context";
+import { useContext } from "react";
 
 const style = {
   position: "absolute" as "absolute",
@@ -20,10 +24,40 @@ const style = {
 const pages = ["Home", "Intership", "Courses"];
 
 const Navbar = () => {
-  const [currentPage, setCurrentPage] = useState(pages[0]);
+  const navigate = useNavigate()
+  const [currentPage, setCurrentPage] = useState(window.location.href);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [admin, setAdmin]: any = useContext(Context);
+
+  window.addEventListener("popstate", function(event) {
+    setCurrentPage(window.location.href)
+  });
+
+  const hidden = ()=>{
+    const logOutBtn = document.getElementById("logOutBtn")
+    if(!logOutBtn?.classList.contains("hidden")){
+      logOutBtn?.classList.add("hidden")
+    }
+  }
+
+  const unhidden = ()=>{
+    const logOutBtn = document.getElementById("logOutBtn")
+    console.log(logOutBtn)
+    console.log(logOutBtn?.classList)
+    if(logOutBtn?.classList.contains("hidden")){
+      logOutBtn?.classList.remove("hidden")
+    }
+  }
+
+  const onLogout = ()=>{
+    setAdmin({
+      ...admin,
+      isLogin: false
+    })
+    navigate('/')
+  }
 
   return (
     <>
@@ -45,7 +79,7 @@ const Navbar = () => {
           aria-label="Global"
         >
           <div className="flex lg:flex-1">
-            <a href="#" className="-m-1.5 p-1.5">
+            <a className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <h1 className="font-black text-2xl text-blue-900">IT LAND</h1>
             </a>
@@ -74,16 +108,16 @@ const Navbar = () => {
           </div>
           <div className="hidden lg:flex lg:gap-x-20">
             {pages.map((page) => {
-              return currentPage === page ? (
+              return currentPage.includes(page) ? (
                 <Link
-                  to={"/"+page}
+                  to={"/" + page}
                   className=" text-sm font-semibold leading-6 text-blue-500 underline decoration-blue-500"
                 >
                   {page}
                 </Link>
               ) : (
                 <Link
-                  to={"/"+page}
+                  to={"/" + page}
                   onClick={() => setCurrentPage(page)}
                   className=" text-sm font-semibold leading-6 text-gray-900"
                 >
@@ -93,23 +127,56 @@ const Navbar = () => {
             })}
           </div>
 
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-3">
-            <a onClick={handleOpen} className="text-sm font-semibold leading-6">
-              <button className="bg-transparent hover:bg-blue-900 text-blue-900 font-semibold hover:text-white py-1 px-4 border border-blue-900 hover:border-transparent rounded">
-                Log In
-              </button>
-            </a>
-            <Link to="/SignUp" className="text-sm font-semibold leading-6">
-              <button className="bg-blue-900 hover:bg-white text-white font-semibold hover:text-blue-900 py-1 px-4 border border-blue-900 rounded">
-                Register
-              </button>
-            </Link>
-            <a href="#" className="text-sm font-semibold leading-6">
-              <button className="opacity-50 cursor-not-allowed bg-white hover:bg-gray-10 text-gray-800 font-semibold py-1 px-4 border border-gray-400  rounded shadow">
-                Admin
-              </button>
-            </a>
-          </div>
+          {admin.isLogin ? (
+            <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-3">
+              <Link
+                to="/AdminBookMarks"
+                className="text-sm font-semibold leading-6"
+              >
+                <button className="bg-transparent hover:bg-blue-900 text-blue-900 font-semibold hover:text-white py-1 px-4  hover:border-transparent rounded">
+                  <BookmarkIcon />
+                </button>
+              </Link>
+              <a className="text-sm font-semibold leading-6">
+                <button className="bg-blue-900 hover:bg-white text-white font-semibold hover:text-blue-900 py-1 px-4  rounded">
+                  <ForumIcon />
+                </button>
+              </a>
+              <a className="text-sm font-semibold leading-6" onMouseOver={unhidden}>
+                <img
+                  src={AdminImg}
+                  alt="admin image"
+                  className="rounded-full h-10"
+                />
+                <div onMouseLeave={hidden}>
+                  <button onClick={onLogout} id="logOutBtn" className="bg-blue-900 hover:bg-white text-white font-semibold hover:text-blue-900 py-1 px-4 border border-blue-900 rounded absolute hidden">
+                    Log out
+                  </button>
+                </div>
+              </a>
+            </div>
+          ) : (
+            <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-3">
+              <a
+                onClick={handleOpen}
+                className="text-sm font-semibold leading-6"
+              >
+                <button className="bg-transparent hover:bg-blue-900 text-blue-900 font-semibold hover:text-white py-1 px-4 border border-blue-900 hover:border-transparent rounded">
+                  Log In
+                </button>
+              </a>
+              <Link to="/SignUp" className="text-sm font-semibold leading-6">
+                <button className="bg-blue-900 hover:bg-white text-white font-semibold hover:text-blue-900 py-1 px-4 border border-blue-900 rounded">
+                  Register
+                </button>
+              </Link>
+              <a className="text-sm font-semibold leading-6">
+                <button className="opacity-50 cursor-not-allowed bg-white hover:bg-gray-10 text-gray-800 font-semibold py-1 px-4 border border-gray-400  rounded shadow">
+                  Admin
+                </button>
+              </a>
+            </div>
+          )}
         </nav>
       </header>
     </>
@@ -125,7 +192,7 @@ const Navbar2 = () => {
           aria-label="Global"
         >
           <div className="flex lg:flex-1">
-            <a href="#" className="-m-1.5 p-1.5">
+            <a className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <h1 className="font-black text-2xl text-blue-900">IT LAND</h1>
             </a>

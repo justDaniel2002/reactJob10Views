@@ -149,7 +149,7 @@ const Home = () => {
               <div className="mt-5">
                 <button
                   style={{ width: "80%" }}
-                  className=" bg-blue-900 hover:bg-white text-white font-xs hover:text-white py-3 px-4 border border-blue-900 hover:border-transparent rounded"
+                  className=" bg-blue-900 hover:bg-white text-white font-xs hover:text-blue-900 py-3 px-4 border border-blue-900 rounded"
                 >
                   Register For Course
                 </button>
@@ -157,7 +157,7 @@ const Home = () => {
                 <br />
                 <button
                   style={{ width: "80%" }}
-                  className="bg-blue-900 hover:bg-white text-white font-xs hover:text-white py-3 px-4 border border-blue-900 hover:border-transparent rounded"
+                  className="bg-blue-900 hover:bg-white text-white font-xs hover:text-blue-900 py-3 px-4 border border-blue-900 rounded"
                 >
                   Add Course
                 </button>

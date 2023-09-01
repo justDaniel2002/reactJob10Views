@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Cards } from "../Data/Data";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
+import { Link } from "react-router-dom";
 
 const Details = () => {
   const { id } = useParams();
@@ -165,9 +166,11 @@ const Details = () => {
         </div>
         <div>2.500</div>
         <div className="text-center">
-          <button className="m-auto bg-blue-900 rounded-lg px-16 hover:text-blue-900 hover:bg-white border border-blue-900 py-4 mt-20 mb-3 font-sans text-2xl text-white">
-            Apply Now
-          </button>
+          <Link to="Apply">
+            <button className="m-auto bg-blue-900 rounded-lg px-16 hover:text-blue-900 hover:bg-white border border-blue-900 py-4 mt-20 mb-3 font-sans text-2xl text-white">
+              Apply Now
+            </button>
+          </Link>
         </div>
       </div>
     </>
