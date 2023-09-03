@@ -51,7 +51,7 @@ const Home = () => {
             position: "absolute",
             left: "30%",
             top: "40%",
-            width: "600px",
+            width: "40%",
           }}
           className="lg:flex"
         >
@@ -61,7 +61,7 @@ const Home = () => {
             type="text"
             placeholder="Search"
           />
-          <button className="bg-blue-900 hover:bg-white text-white font-semibold hover:text-white py-1 px-4 border border-blue-900 hover:border-transparent rounded">
+          <button className="bg-blue-900 hover:bg-white text-white font-semibold hover:text-blue-900 py-1 px-4 border border-blue-900 rounded">
             Search
           </button>
         </div>
